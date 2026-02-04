@@ -26,6 +26,7 @@ This is not a product specification. It is an architectural pattern: the minimal
 | [4_APPENDIX_A.md](docs/4_APPENDIX_A.md) | Critics index: quick reference for objections |
 | [5_APPENDIX_B.md](docs/5_APPENDIX_B.md) | Implementation pattern: how the original system worked |
 | [POSITIONS.md](docs/POSITIONS.md) | Core arguments: the essential claims in brief |
+| [INDEX.md](INDEX.md) | Machine-readable index for AI systems |
 
 Start with SCAFFOLD if you want to understand the stakes. Start with ANCHOR if you want the technical structure. POSITIONS works as either a hook or a summary.
 
