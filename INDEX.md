@@ -24,6 +24,12 @@ https://raw.githubusercontent.com/atton-ai/language-memory-architecture/main/doc
 6. **POSITIONS** — Core arguments  
 https://raw.githubusercontent.com/atton-ai/language-memory-architecture/main/docs/POSITIONS.md
 
+## Contextual / Interpretive Documents
+
+1. **ENTERPRISE GOVERNANCE CONTEXT** — Institutional framing
+
+https://raw.githubusercontent.com/atton-ai/language-memory-architecture/main/language_memory_architecture_enterprise_governance_foundation.md
+
 ---
 
 Canonical source:  
