@@ -136,6 +136,12 @@ The index is not just a directory. It is a map of meaning. It gives structure to
 
 Without an index, memory becomes a pile of notes. With it, memory becomes a system.
 
+At small and medium scale, the full index can be held within the model's context window, which eliminates the need for any external routing infrastructure. The model reads the index, understands what
+exists, and selects the relevant state documents itself.
+
+At enterprise scale, where the index exceeds context limits, a narrow-task language model serves as the routing interface between query and state.
+
+
 ### 4.3 Semantic read and write
 
 The model must be able to read from this memory space and use it as context for its responses. It must also be able to propose changes to that space when new information or clarification emerges.
@@ -168,13 +174,19 @@ Language Memory Architecture does not try to.
 
 Instead, it treats ambiguity as something to be managed through visibility and revision, rather than eliminated through precision.
 
-The core of LMA is a simple loop.
+A core element of LMA is a simple loop.
 
-The system reads from memory to condition its behaviour.
-The system proposes changes when new context emerges.
-The user reviews those changes.
-The user accepts, edits, or rejects them.
+A user authors an instruction set that shapes the system's behaviour. Over time, the user's actual needs may drift from what was originally authored. The system detects this by observing repeated patterns that conflict with the current state — for example, a user who has specified concise responses but consistently asks for longer ones.
+
+When this divergence crosses a defined threshold of frequency or persistence, the system does not silently adapt. It surfaces the conflict to the user as a proposed revision to the instruction set.
+
+The user reviews the proposed change.
+The user accepts, edits, or rejects it.
 The system updates its internal state accordingly.
+
+This is why the loop exists. The system does not learn behind the user's back. It presents what it has noticed and asks for permission to change. Evolution is explicit, not silent.
+
+Over time, the authored state converges on the user's actual needs rather than their initial assumptions. The system becomes more aligned not because it is smarter, but because the user has progressively authored it into alignment.
 
 This loop replaces silent adaptation with explicit evolution.
 
@@ -265,9 +277,7 @@ To understand where it fits, it helps to think in three tiers.
 
 This is LMA itself. It is the layer where the user's goals, rules, and long-term context live. It is the only part of the system that the user directly authors.
 
-It does not execute tasks. It does not call APIs. It does not manage services.
-
-It defines the system's internal state.
+It defines the system's internal state. Everything downstream operates within the context it provides.
 
 ### Tier 2: Orchestration and agents
 
@@ -408,19 +418,31 @@ These two pressures are converging. Users want continuity and personalisation. P
 
 Language Memory Architecture names the layer that resolves this tension. It is not waiting on a future breakthrough. The capabilities already exist. What is missing is the interface that makes them governable.
 
+The emergence of open connectivity standards such as MCP makes this point concrete. A language model can now read and write to external file systems at conversational speed. The infrastructure required for persistent, user-controlled state already exists.
+
+But infrastructure is not architecture. Connecting a model to a folder does not produce a governed system. Without a canonical index, a governance loop, a detection mechanism for misalignment, and an authored structure of state, the result is tool access, not a control plane.
+
+The optimal arrangement would be user-owned state held natively within the platform's context — pre-loaded, zero-latency, and directly accessible. This is how the earliest working implementations of this architecture operated. But native integration requires the platform to host mutable, user-authored state that shapes model behaviour, which reintroduces the liability boundary this architecture exists to resolve.
+
+External connectivity through protocols like MCP offers a practical alternative. State lives on user-controlled infrastructure. Read and write operations occur through tool calls, introducing minor but acceptable latency. The trade-off is precise: a small cost in speed for a clear boundary of authorship.
+
+The capabilities are here. What remains missing is the design that makes them coherent.
+
 ---
 
 ## 11. Conclusion: from tools to authored systems
 
 Human–AI interaction is at a turning point.
 
-We have built systems that can reason, retrieve, plan, and act. But we still ask people to steer them through a thin conversational layer that leaves no trace and offers no structure.
+We have built systems that can reason, retrieve, plan, and act. But we still ask people to steer them through a thin conversational layer that leaves little trace and offers little structure.
 
 This paper has argued that the missing piece is not more intelligence, but a front-end control plane. A place where intent, rules, and long-term context can live. A place the user can see, change, and govern.
 
 Language Memory Architecture defines the minimal structure for such a layer. It does not promise correctness. It promises continuity. It does not eliminate ambiguity. It makes it visible and revisable.
 
 Most importantly, it changes the relationship between people and AI systems. Instead of issuing commands to a black box, the user authors a system. Instead of adapting silently, the system evolves in the open.
+
+Because the control plane is written in natural language, it does not require the user to learn a programming language, a query syntax, or a configuration schema. The same property that allows language to function as a control medium allows the user to read, author, and revise the system in their own words. This is not a convenience. It is a structural requirement. If the goal is user authorship, the medium must be one the user already commands.
 
 This is not a new class of machine. It is a new class of interface.
 
